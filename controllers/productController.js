@@ -11,6 +11,20 @@ exports.postProduct = async (req, res) => {
     }
 };
 
+
+
+exports.postProduct = async (req, res) => {
+    try {
+        console.log('req.user:', req.user);  // Debugging
+        validateProductData(req.body);
+        const product = await productService.postProduct(req.user._id, req.body);  // Use req.user._id
+        res.status(201).json(product);
+    } catch (error) {
+        console.error('Error posting product:', error);  // Log the error details
+        errorResponse(res, 400, error.message);
+    }
+};
+
 exports.getAllProducts = async (req, res) => {
     try {
         const products = await productService.getAllProducts();

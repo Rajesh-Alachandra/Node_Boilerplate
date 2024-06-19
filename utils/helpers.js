@@ -18,12 +18,13 @@ exports.errorResponse = (res, statusCode, message) => {
 exports.generateToken = (user) => {
     const payload = {
         user: {
-            id: user.id,
+            id: user._id,  // Make sure to use _id
             name: user.name
         },
     };
     return jwt.sign(payload, config.jwtSecret, { expiresIn: '1h' });
 };
+
 
 //! Function to hash passwords
 exports.hashPassword = async (password) => {
