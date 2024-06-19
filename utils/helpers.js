@@ -19,6 +19,7 @@ exports.generateToken = (user) => {
     const payload = {
         user: {
             id: user.id,
+            name: user.name
         },
     };
     return jwt.sign(payload, config.jwtSecret, { expiresIn: '1h' });

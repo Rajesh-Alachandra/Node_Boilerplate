@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const connectDB = require('./config/db');
 const config = require('./config/config');
+const setupSwagger = require('./config/swagger'); // Import setupSwagger
 
 const app = express();
 
@@ -23,6 +24,10 @@ app.use('/api/products', require('./routes/product'));
 app.get('/', (req, res) => {
     res.render('index', { title: 'Home Page' });
 });
+
+
+//! Setup Swagger
+setupSwagger(app); // Use setupSwagger
 
 const PORT = config.port;
 app.listen(PORT, () => {
