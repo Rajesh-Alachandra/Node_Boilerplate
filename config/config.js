@@ -7,3 +7,7 @@ module.exports = {
     dbURI: process.env.DB_URI || 'mongodb://localhost:27017/Auth',
     jwtSecret: process.env.JWT_SECRET,
 };
+
+
+
+// bIn6Ina1zSS6Sz5q
