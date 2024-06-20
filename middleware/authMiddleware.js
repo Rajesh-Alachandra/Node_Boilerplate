@@ -10,10 +10,10 @@ const authMiddleware = async (req, res, next) => {
     }
 
     try {
-        console.log('Token:', token);
+        console.log('Token:', token);  // Debugging
         const decoded = jwt.verify(token, config.jwtSecret);
-        console.log('Decoded:', decoded);
-        const user = await User.findById(decoded.user.id);  // Corrected path to user ID
+        console.log('Decoded:', decoded);  // Debugging
+        const user = await User.findById(decoded.user.id);
         if (!user) {
             throw new Error('User not found');
         }
@@ -21,7 +21,7 @@ const authMiddleware = async (req, res, next) => {
         console.log('User:', user);  // Debugging
         next();
     } catch (err) {
-        console.error('Auth Error:', err);  // Log the error details
+        console.error('Auth Error:', err.message);  // Log the error details
         res.status(401).json({ msg: 'Token is not valid' });
     }
 };
