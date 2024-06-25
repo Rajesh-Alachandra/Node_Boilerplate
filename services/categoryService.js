@@ -1,4 +1,5 @@
 const Category = require('../models/Category');
+const Product = require('../models/Product');
 
 exports.createCategory = async (name) => {
     const category = new Category({ name });
@@ -11,7 +12,12 @@ exports.getAllCategories = async () => {
 };
 
 exports.getCategoryById = async (categoryId) => {
-    return await Category.findById(categoryId);
+    const category = await Category.findById(categoryId);
+    if (!category) {
+        throw new Error('Category not found');
+    }
+    const products = await Product.find({ category: categoryId });
+    return { category, products };
 };
 
 exports.updateCategory = async (categoryId, name) => {

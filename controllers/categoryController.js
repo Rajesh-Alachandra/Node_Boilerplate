@@ -21,11 +21,8 @@ exports.getAllCategories = async (req, res) => {
 
 exports.getCategoryById = async (req, res) => {
     try {
-        const category = await categoryService.getCategoryById(req.params.id);
-        if (!category) {
-            return errorResponse(res, 404, 'Category not found');
-        }
-        res.status(200).json(category);
+        const { category, products } = await categoryService.getCategoryById(req.params.id);
+        res.status(200).json({ category, products });
     } catch (error) {
         errorResponse(res, 400, error.message);
     }
