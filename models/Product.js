@@ -5,6 +5,7 @@ const ProductSchema = new mongoose.Schema({
     description: { type: String, required: true },
     price: { type: Number, required: true },
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },  // Added category reference
 });
 
 module.exports = mongoose.model('Product', ProductSchema);
